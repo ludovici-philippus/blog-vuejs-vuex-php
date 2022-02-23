@@ -12,6 +12,7 @@ export default createStore({
   mutations: {
       buscar(state, texto){
           state.busca = texto;
+          console.log(state.busca);
       }
   },
   actions: {
