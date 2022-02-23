@@ -17,7 +17,7 @@
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.containter{
+.container{
     max-width: 900px;
     margin: auto;
     padding: 0 2%;
