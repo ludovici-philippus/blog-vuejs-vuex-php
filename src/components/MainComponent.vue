@@ -17,7 +17,8 @@ export default{
     name: "MainComponent",
     data(){
         return{
-            posts: []
+            posts: [],
+            busca: this.$store.getters.getBusca
         }
     },
     components:{
@@ -32,11 +33,24 @@ export default{
                             return JSON.parse(body);
                         });
                 this.posts = posts_fetch;
-                console.log(posts_fetch);
+        },
+        get_posts_busca: async function(){
+            const posts_fetch = await fetch("http://localhost/reactjs/api/get_posts.php?posts=true&busca="+this.busca).
+                then(response => response.text()).
+                then(body => JSON.parse(body));
+
+            this.posts = posts_fetch;
         }
     },
     mounted(){
         this.get_posts();
+        console.log(this.busca);
+    },
+    watch: {
+        '$store.getters.getBusca': function(){
+            this.busca = this.$store.getters.getBusca;
+            this.get_posts_busca();
+        },
     }
 }
 </script>
