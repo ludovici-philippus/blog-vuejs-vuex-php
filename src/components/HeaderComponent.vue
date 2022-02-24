@@ -3,7 +3,6 @@
         <div class="overlay"></div>
         <div class="header__content">        
             <div class="logo">
-                <h2>Buscou por: {{ this.$store.getters.getBusca }}</h2>
                 <router-link to="/"><h1>Blog</h1></router-link>
             </div>
             <BuscaComponent/>

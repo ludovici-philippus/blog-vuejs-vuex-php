@@ -18,7 +18,8 @@ export default{
     data(){
         return{
             posts: [],
-            busca: this.$store.getters.getBusca
+            busca: this.$store.getters.getBusca,
+            slug_categoria: this.$route.params.slug
         }
     },
     components:{
@@ -40,17 +41,32 @@ export default{
                 then(body => JSON.parse(body));
 
             this.posts = posts_fetch;
+        },
+        get_posts_categoria: async function(){
+            const posts_fetch = await fetch("http://localhost/reactjs/api/get_posts.php?posts=true&categoria="+this.slug_categoria).
+                then(response => response.text()).
+                then(body => JSON.parse(body));
+            this.posts = posts_fetch;
         }
     },
     mounted(){
-        this.get_posts();
-        console.log(this.busca);
+        if(this.slug_categoria != undefined)
+            this.get_posts_categoria();
+        else
+            this.get_posts();
     },
     watch: {
         '$store.getters.getBusca': function(){
             this.busca = this.$store.getters.getBusca;
             this.get_posts_busca();
         },
+        $route: function(){
+            this.slug_categoria = this.$route.params.slug;
+            if(this.slug_categoria != undefined)
+                this.get_posts_categoria();
+            else
+                this.get_posts();
+        }
     }
 }
 </script>

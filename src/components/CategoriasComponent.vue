@@ -1,6 +1,6 @@
 <template>
     <div class="categorias">
-        <router-link :key="category.id" v-for="category in categories" :to="category.slug">{{ category.nome }}</router-link> 
+        <router-link :key="category.id" v-for="category in categories" :to='"/"+category.slug'>{{ category.nome }}</router-link> 
     </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
     name: "CategoriasComponent",
     data(){
         return{
-            categories: ""
+            categories: "",
         }
     },
     methods:{
